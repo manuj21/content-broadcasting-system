@@ -1,0 +1,42 @@
+1. Authentication & RBAC
+- JWT used for authentication
+- Middleware verifies token
+- Role-based access:
+  - Teacher → upload
+  - Principal → approve/reject
+
+2. Subject-Based Design
+- Each content has subject
+- Public API filters by teacher
+- Scheduling applied per subject
+
+3. Upload Handling
+- Multer used for file upload
+- Files stored locally in /uploads
+
+4. Approval Workflow
+- Content starts as "pending"
+- Principal approves/rejects
+- Only approved content goes live
+
+5. Scheduling Logic
+- Each content has duration
+- Total duration = sum of all contents
+- Active content determined by:
+  current_time % total_duration
+- Loop continues infinitely
+
+6. Database Design
+- Users table
+- Content table
+- Schedule table
+- Relationships via foreign keys
+
+7. Middleware Usage
+- verifyToken → authentication
+- checkRole → authorization
+
+8. Scalability Approach
+- Can add Redis caching for /live API
+- Can use queues for uploads
+- Can move files to S3
